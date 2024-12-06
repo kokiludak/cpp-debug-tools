@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define ITERATIONS 100
+
 void Help(){
 	cout << "Usage: generator output solution (cpp files)\n"; 
 }
@@ -24,11 +26,14 @@ int main(int argc, char **argv){
 		cout << '\n';
 		cout.flush();
 		//run files
-		system(string(generator+".exe " + gargs + " > inputf.txt").c_str()); // 
-		system(string(output+".exe" + " < inputf.txt > outputf.txt").c_str());
-		system(string(solution+".exe" + " < inputf.txt > answerf.txt").c_str());
-		//compare results
-		system("fc outputf.txt answerf.txt");
+		for(int i = 0; i < ITERATIONS; i++){
+			system(string(generator+".exe " + to_string(ITERATIONS) + ' ' + gargs + " > inputf.txt").c_str()); // 
+			system(string(output+".exe" + " < inputf.txt > outputf.txt").c_str());
+			system(string(solution+".exe" + " < inputf.txt > answerf.txt").c_str());
+			//compare results
+			system("fc outputf.txt answerf.txt");
+		}
+		
 	} 
 	return result;
 }
